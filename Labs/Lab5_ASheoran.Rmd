@@ -1,0 +1,109 @@
+---
+title: "Lab 5: Data Wrangling"
+author: "Atibha Sheoran"
+date: "2/19/2020"
+output: html_document
+---
+
+```{r}
+setwd("~/COLLEGE BABY!!!/Senior year/S2/Bio 497G/Labs/Data")
+```
+
+```{r}
+library(tidyverse)
+download.file(url="https://ndownloader.figshare.com/files/2292169", destfile = "~/COLLEGE BABY!!!/Senior year/S2/Bio 497G/Labs/Data/portal_data_joined.csv")
+surveys <- read_csv("~/COLLEGE BABY!!!/Senior year/S2/Bio 497G/Labs/Data/portal_data_joined.csv")
+```
+
+Challenge #1
+Using pipes, subset the surveys data to include animals collected before 1995 and retain only the columns year, sex, and weight
+```{r}
+surveys_chal1 <- surveys %>% filter(year < 1995) %>% select(year, sex, weight)
+surveys_chal1
+```
+
+Challenge #2
+Create a new data frame from the surveys data that meets the following criteria: contains only the species_id column and a new column called hindfoot_half containing values that are half the hindfoot_length values. In this hindfoot_half column, there are no NAs and all values are less than 30.
+```{r}
+surveys_chal2 <- surveys %>% filter(!is.na(hindfoot_length)) %>% mutate(hindfoot_half = hindfoot_length / 2) %>% filter(hindfoot_half < 30) %>% select(species_id, hindfoot_half)
+surveys_chal2
+```
+Challenge 3
+Part A: How many animals were caught in each plot_type surveyed?
+```{r}
+surveys_chal3A<- surveys %>% count(plot_type)
+surveys_chal3A
+```
+Part B: Use group_by() and summarize() to find the mean, min, and max hindfoot length for each species (using species_id). Also add the number of observations.
+```{r}
+surveys_chal3B<- surveys %>% filter(!is.na(hindfoot_length)) %>% group_by(species_id) %>% summarize(mean_hindfoot_length = mean(hindfoot_length), min_hindfoot_length = min(hindfoot_length), max_hindfoot_length = max(hindfoot_length), n = n())
+surveys_chal3B 
+```
+Part C: What was the heaviest animal measured in each year? Return the columns year, genus, species_id, and weight.
+```{r}
+surveys_chal3C<- surveys %>% filter(!is.na(weight)) %>% group_by(year) %>% filter(weight == max(weight)) %>% select(year, genus, species, weight) %>% arrange(year)
+surveys_chal3C
+```
+
+```{r}
+SNPs <- read_tsv("~/COLLEGE BABY!!!/Senior year/S2/Bio 497G/Labs/Data/23andMe_complete.txt", skip = 14, col_types = cols(chromosome = col_factor()))
+```
+
+```{r}
+str(SNPs)
+view(SNPs)
+```
+
+Exercise #1
+Subset (select) the 23andMe Complete table to just position and genotype
+```{r}
+SNPs_sub <- select(SNPs, position, genotype) %>% print(n = 10)
+SNPs_sub
+```
+Exercise #2
+Filter to just the MT chromosome and remove genotypes A and T. (you can use != to remove).
+```{r eval= FALSE}
+SNPs_fil <- SNPs %>% filter(SNPs, chromosome== MT) %>% filter(!is.na(A)) %>% filter(!(is.na(T))
+SNPs_fil
+```
+Exercise #3
+Use group_by() and summarize() to find the min positon, max position and total number of positions for each chromosomes.
+```{r}
+SNPs_gs <- SNPs %>% group_by(chromosome) %>% summarize(max_position = max(position, na.rm = TRUE), min_position = min(position), count = n())
+SNPs_gs
+```
+Exercise #4
+Building on ex3 create using mutate a new column with the density of SNPs for each chromosome based the total number of SNPs divided by the max position - min position
+```{r}
+SNPs_mut<- SNPs_gs %>% mutate(SNPs_density= count / max_position-min_position)
+SNPs_mut
+```
+Exercise #5
+Building on ex3 sort chromosomes based on SNP density.
+```{r}
+SNPs_sort <- SNPs_mut %>% arrange(SNPs_density)
+SNPs_sort
+```
+Exercise #6
+Export the above table as a csv file to your data directory (There will be no results except the code to show me). However you will get an error when knitting if the code is not correct.
+```{r}
+write_csv(SNPs_sort, path = "~/COLLEGE BABY!!!/Senior year/S2/Bio 497G/Labs/Data/SNPs_sort.csv")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,54 @@
+---
+title: "Lab 4: Publication Graphics"
+author: "Atibha Sheoran"
+date: "2/12/2020"
+output: html_document
+---
+
+Exercise 1
+```{r}
+setwd("~/COLLEGE BABY!!!/Senior year/S2/Bio 497G/Labs/Data")
+library(ggplot2)
+SNPs <- read.table("23andMe_complete.txt", header = TRUE, sep = "\t")
+a <- ggplot(SNPs, aes(chromosome)) + geom_bar(color= "steelblue", fill="steelblue")
+a + ggtitle("Total SNP counts for each chromosome") + ylab("SNP counts") + xlab("Chromosome number")
+```
+
+Exercise 2
+```{r}
+ab <- ggplot(SNPs, aes(chromosome, fill = genotype)) + geom_bar(color = "black")
+ab + ggtitle("Total SNPs count") + scale_y_continuous(trans= 'log10') + ylab("SNP counts") + xlab("Chromosome number")
+```
+
+Exercise 3
+```{r eval= FALSE}
+ppi <- 300
+png("Lab3_ex5_graph.png", width=6*ppi, height=6*ppi,res=ppi)
+ad <- ggplot(data = SNPs) + geom_bar(mapping = aes(x = chromosome, fill = genotype), position = "dodge")
+ad + ggtitle("Sorted based on genotype/ chromosome comparison")
+```
+<img src="Lab3_ex5_graph.png" alt="Sorted based on genotype/ chromosome comparison" style="width: 600px;"/>
+
+
+Exercise 4
+```{r}
+SNPs$chromosome = ordered(SNPs$chromosome, levels=c(seq(1, 22), "X", "Y", "MT"))
+ae <- ggplot(SNPs, aes(chromosome, fill = genotype)) + geom_bar(position = "dodge") + facet_wrap(~chromosome, scales = "free", strip.position = c("bottom"))
+ae + ggtitle("SNPs per chromosome sorted using facet_wrap") + labs(y= "SNP counts", x= "chromosome number")
+```
+
+Exercise 5
+```{r}
+library(plotly)
+SNPs$chromosome = ordered(SNPs$chromosome, levels=c(seq(1, 22), "X", "Y", "MT"))
+p <- ggplot(SNPs, aes(chromosome, fill = genotype)) + geom_bar(position = "dodge") + facet_wrap(~chromosome, scales = "free", ncol = 5) + ggtitle("SNPs per chromosome sorted using facet_wrap") + labs(y= "SNP counts", x= "chromosome number")
+ggplotly(p)
+```
+
+Exercise 6
+```{r}
+library(plotly)
+SNPs$chromosome = "Y"
+pp <- ggplot(SNPs, aes(chromosome, fill = genotype)) + geom_bar(position = "dodge") + ggtitle("SNPs on the Y chromosome") + labs(y= "SNP counts", x= "chromosome")
+ggplotly(pp)
+```
