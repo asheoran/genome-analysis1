@@ -1,0 +1,36 @@
+@misc{noauthor_r_nodate-1,
+  title = {R {Markdown} {Team}},
+  url = {https://rmarkdown.rstudio.com/},
+  abstract = {Turn your analyses into high quality documents, reports, presentations and dashboards with R Markdown. Use a productive notebook interface to weave together narrative text and code to produce elegantly formatted output. Use multiple languages including R, Python, and SQL. R Markdown supports a reproducible workflow for dozens of static and dynamic output formats including HTML, PDF, MS Word, Beamer, HTML5 slides, Tufte-style handouts, books, dashboards, shiny applications, scientific articles, websites, and more.},
+  urldate = {2020-05-04},
+  journal = {Rmarkdown: R Markdown Document Conversion, R Package},
+  note = {publisher: RStudio, Inc}
+  }
+  
+@misc{noauthor_rstudio_nodate,
+	type = {Open source \& professional software for data science teams},
+	title = {{RStudio} {Team}},
+	url = {https://rstudio.com/},
+	abstract = {RStudio provides free and open source tools for R and enterprise-ready professional software for data science teams to develop and share their work at scale.},
+	language = {en},
+	urldate = {2020-05-04},
+	journal = {RStudio: Integrated Development Environment for R},
+	note = {publisher: RStudio, Inc.}
+}
+
+@misc{noauthor_r_nodate-1,
+	type = {The {R} {Project} for {Statistical} {Computing}},
+	title = {R {Core} {Team}},
+	url = {https://www.r-project.org/},
+	urldate = {2020-05-04},
+	journal = {R: A Language and Environment for Statistical Computing},
+	note = {publisher: RStudio, Inc.}
+}
+
+@misc{blanchard_human_nodate,
+	title = {Human {Genome} {Analysis} {Lab} 6 : git and {Rstudio} projects},
+	url = {https://jeffreyblanchard.github.io/GenomeAnalysisR/Lab6_HuGen_2020.html},
+	urldate = {2020-05-04},
+	author = {Blanchard, Jeffrey},
+	note = {publisher: GitHub}
+}
