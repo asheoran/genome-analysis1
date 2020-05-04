@@ -1,0 +1,31 @@
+---
+title: "index.Rmd"
+author: "Atibha Sheoran"
+date: "5/4/2020"
+output: html_document
+bibliography: Notes (R)/citations.bib
+---
+
+Lab 2B: file:///C:/Users/Atibha%20Sheoran/Documents/genome-analysis1/htmls/lab2B_ASheoran.html
+
+Lab 3: file:///C:/Users/Atibha%20Sheoran/Documents/genome-analysis1/htmls/lab3_ASheoran.html
+
+Lab 4: file:///C:/Users/Atibha%20Sheoran/Documents/genome-analysis1/htmls/lab4_ASheoran.html
+
+Lab 5: file:///C:/Users/Atibha%20Sheoran/Documents/genome-analysis1/htmls/Lab5_ASheoran.html
+
+Lab 9: file:///C:/Users/Atibha%20Sheoran/Documents/genome-analysis1/htmls/lab9_ASheoran.html
+
+Lab 10: file:///C:/Users/Atibha%20Sheoran/Documents/genome-analysis1/htmls/Lab10_ASheoran.html
+
+
+# References
+
+
+Blanchard, Jeffrey. Human Genome Analysis Lab 6: Git and Rstudio Projects. GitHub, https://jeffreyblanchard.github.io/GenomeAnalysisR/Lab6_HuGen_2020.html. Accessed 4 May 2020.
+
+“R Core Team.” R: A Language and Environment for Statistical Computing, RStudio, Inc., https://www.r-project.org/. Accessed 4 May 2020.
+
+“R Markdown Team.” Rmarkdown: R Markdown Document Conversion, R Package, RStudio, Inc, https://rmarkdown.rstudio.com/. Accessed 4 May 2020.
+
+“RStudio Team.” RStudio: Integrated Development Environment for R, RStudio, Inc., https://rstudio.com/. Accessed 4 May 2020.
