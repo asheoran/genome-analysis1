@@ -3,7 +3,7 @@ title: "index.Rmd"
 author: "Atibha Sheoran"
 date: "5/4/2020"
 output: html_document
-bibliography: Notes (R)/citations.bib
+bibliography: citations.bib
 ---
 
 Lab 2B: file:///C:/Users/Atibha%20Sheoran/Documents/genome-analysis1/htmls/lab2B_ASheoran.html
