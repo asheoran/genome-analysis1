@@ -18,6 +18,8 @@ Lab 9: file:///C:/Users/Atibha%20Sheoran/Documents/genome-analysis1/htmls/lab9_A
 
 Lab 10: file:///C:/Users/Atibha%20Sheoran/Documents/genome-analysis1/htmls/Lab10_ASheoran.html
 
+Lab 11: https://www.shinyapps.io/admin/#/applications/all
+
 
 # References
 
