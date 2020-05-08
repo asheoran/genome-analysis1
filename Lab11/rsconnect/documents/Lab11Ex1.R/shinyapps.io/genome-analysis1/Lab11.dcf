@@ -1,0 +1,13 @@
+name: Lab11
+title: Lab11
+username:
+account: genome-analysis1
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2262412
+bundleId: 3117866
+url: https://genome-analysis1.shinyapps.io/Lab11/
+when: 1588884017.32674
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Lab11Ex2.R|Lab11Ex3.R|Lab11Ex4.R
