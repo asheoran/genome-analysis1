@@ -6,25 +6,25 @@ output: html_document
 bibliography: citations.bib
 ---
 
-[Lab 2B]: (htmls/lab2B_ASheoran.html)
+[Lab 2B](htmls/lab2B_ASheoran.html)
 
-[Lab 3]: (htmls/lab3_ASheoran.html)
+[Lab 3](htmls/lab3_ASheoran.html)
 
-[Lab 4]: (htmls/lab4_ASheoran.html)
+[Lab 4](htmls/lab4_ASheoran.html)
 
-[Lab 5]: (htmls/Lab5_ASheoran.html)
+[Lab 5](htmls/Lab5_ASheoran.html)
 
-Lab 9: https://moodle.umass.edu/pluginfile.php/3107910/assignsubmission_onlinetext/submissions_onlinetext/4404464/ASheoran-lab9.html?time=1589204519153
+[Lab 9](htmls/lab9_ASheoran.html)
 
-Lab 10: https://moodle.umass.edu/pluginfile.php/3123689/assignsubmission_onlinetext/submissions_onlinetext/4456954/Lab10_ASheoran.html
+[Lab 10](htmls/Lab10_ASheoran.html)
 
-Lab 11 Ex1: https://genome-analysis1.shinyapps.io/Lab11Ex1/?_ga=2.75025680.348196319.1589204180-1412444802.1588882987
+[Lab 11 Ex1](htmls/Lab11Ex1.html)
 
-Lab 11 Ex2: https://genome-analysis1.shinyapps.io/Lab11Ex2/?_ga=2.53625130.348196319.1589204180-1412444802.1588882987
+[Lab 11 Ex2](htmls/Lab11Ex2.html)
 
-Lab ll Ex3: https://genome-analysis1.shinyapps.io/Lab11Ex3/?_ga=2.86680986.348196319.1589204180-1412444802.1588882987
+[Lab ll Ex3](htmls/Lab11Ex3.html)
 
-Lab 11 Ex 4: https://genome-analysis1.shinyapps.io/Lab11Ex4/?_ga=2.40461600.348196319.1589204180-1412444802.1588882987
+[Lab 11 Ex 4](htmls/Lab11Ex4.html)
 
 
 # References
