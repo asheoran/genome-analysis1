@@ -20,11 +20,11 @@ Lab 10: https://moodle.umass.edu/pluginfile.php/3123689/assignsubmission_onlinet
 
 Lab 11 Ex1: https://genome-analysis1.shinyapps.io/Lab11Ex1/?_ga=2.75025680.348196319.1589204180-1412444802.1588882987
 
-Lab 11 Ex2:https://genome-analysis1.shinyapps.io/Lab11Ex2/?_ga=2.53625130.348196319.1589204180-1412444802.1588882987
+Lab 11 Ex2: https://genome-analysis1.shinyapps.io/Lab11Ex2/?_ga=2.53625130.348196319.1589204180-1412444802.1588882987
 
 Lab ll Ex3: https://genome-analysis1.shinyapps.io/Lab11Ex3/?_ga=2.86680986.348196319.1589204180-1412444802.1588882987
 
-Lab 11 Ex 4:https://genome-analysis1.shinyapps.io/Lab11Ex4/?_ga=2.40461600.348196319.1589204180-1412444802.1588882987
+Lab 11 Ex 4: https://genome-analysis1.shinyapps.io/Lab11Ex4/?_ga=2.40461600.348196319.1589204180-1412444802.1588882987
 
 
 
