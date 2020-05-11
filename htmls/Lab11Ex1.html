@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<!-- saved from url=(0105)https://genome-analysis1.shinyapps.io/Lab11Ex1/?_ga=2.75025680.348196319.1589204180-1412444802.1588882987 -->
+<html class=""><div id="twoseven-scripts" data-info="Scripts added by TwoSeven extension"><script type="text/javascript" id="__tmpScript-722889603" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven = {
+    reportError: function reportError (tag, e, data) {
+  if (typeof data === 'string') {
+    data = {
+      message: data
+    }
+  }
+
+  Object.assign(data, {
+    error: {
+      message: e.message,
+      stack: e.stack
+    }
+  })
+  postToParent({
+    name,
+    tag,
+    action: 'report-error',
+    json: data
+  })
+}
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-696736827" data-added-by-two-seven="1">(function() {
+    
+  window.twosevenHmsToSecondsOnly = function(str) {
+      var p = str.split(':'),
+          s = 0, m = 1;
+
+      while (p.length > 0) {
+          s += m * parseInt(p.pop(), 10);
+          m *= 60;
+      }
+
+      return s;
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-778892373" data-added-by-two-seven="1">(function() {
+    window.twosevenExtLog = function twosevenExtLog (tag, msg, type) {
+  if (!msg) {
+    msg = tag
+    tag = undefined
+  }
+  let color = type || 'black'
+  if (type) {
+    switch (type) {
+      case 'success':
+        color = 'Green'
+        break
+      case 'info':
+        color = 'DodgerBlue'
+        break
+      case 'error':
+        color = 'Red'
+        break
+      case 'warning':
+        color = 'Orange'
+        break
+      default:
+        color = type
+    }
+  }
+  // AMO review process requires logging to be disabled
+  if (tag) {
+    console.log('%c' + tag + ': ' + msg, `color:${color}`)
+  } else {
+    console.log('%c' + msg, `color:${color}`)
+  }
+};
+  })();</script><script type="text/javascript" id="__tmpScript-730223990" data-added-by-two-seven="1">(function() {
+    
+  document.twosevenGET = function(url, callback) {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+        if (xmlhttp.status == 200) {
+          callback(null, xmlhttp.responseText);
+        } else {
+          callback('something else other than 200 was returned', '');
+        }
+      }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+  };
+;
+  })();</script><script type="text/javascript" id="__tmpScript-60401135" data-added-by-two-seven="1">(function() {
+    
+  window.triggerEvent = function (el, name, data, asString = false) {
+  if (window.twosevenScriptsDiv && data && typeof data === 'object') {
+    // We're in CS context
+    // We cannot send objects as part of event.detail
+    // Warn the user about this
+    console.warn(`WARNING: Attempting to send an object via event.detail from CS->Page does not work on Firefox: ${JSON.stringify(data)}`)
+    console.error(new Error().stack)
+  }
+  let detail
+  if (asString) {
+    detail = data
+  } else {
+    detail = { data }
+  }
+  var evt = new CustomEvent(name, { bubbles: true, detail })
+  el.dispatchEvent(evt)
+}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-638180743" data-added-by-two-seven="1">(function() {
+    window.postTo = async function postTo (targetWindow, data, expectResponse = false) {
+  // twosevenExtLog(tag, `Attempting to post to parent: ${JSON.stringify(data)}`)
+  data.name = data.name || name
+  let promise
+  if (expectResponse) {
+    promise = new Promise(resolve => {
+      const ackID = `ack-${data.action}-${((Math.random() * 1e9) | 0)}`
+      data.ack = {
+        event: ackID
+      }
+      const actions = ['play', 'pause', 'currentTime']
+      if (window.debug && actions.some(x => data.action.includes(x))) {
+        debugger
+      }
+      window.addEventListener('message', function once ({ data = {} }) {
+        if (data.action !== ackID) {
+          return
+        }
+        window.removeEventListener('message', once)
+        resolve(data.json)
+      })
+    })
+  } else {
+    promise = new Promise(resolve => resolve())
+  }
+  targetWindow.postMessage(data, '*')
+  return promise
+};
+  })();</script><script type="text/javascript" id="__tmpScript-590915349" data-added-by-two-seven="1">(function() {
+    window.postResponse = async function postResponse (e, json) {
+  const { source, data: { ack: { event } } } = e
+  postTo(source, {
+    action: event,
+    json
+  })
+};
+  })();</script><script type="text/javascript" id="__tmpScript-407110733" data-added-by-two-seven="1">(function() {
+    window.postToParent = async function postToParent (data, expectResponse = false) {
+  return postTo(window.parent, data, expectResponse)
+};
+  })();</script><script type="text/javascript" id="__tmpScript-585558702" data-added-by-two-seven="1">(function() {
+    window.postToTop = async function postToTop (data, expectResponse = false) {
+  return postTo(window.top, data, expectResponse)
+};
+  })();</script><script type="text/javascript" id="__tmpScript-170718173" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.getFromStorage = (key) => {
+  return new Promise((resolve, reject) => {
+    const evt = 'get-from-storage-' + (Math.random() * 1e9 | 0)
+    window.addEventListener(evt, (e) => {
+      window.removeEventListener(evt, this)
+      const { detail: { data: { value } } } = e
+      resolve(value)
+    })
+    triggerEvent(window, 'get-from-storage', {
+      key,
+      evt
+    })
+  })
+}
+  window.twoseven.saveToStorage = (dict) => {
+  triggerEvent(window, 'save-to-storage', dict)
+}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-405618411" data-added-by-two-seven="1">(function() {
+    
+  function attachHistoryListeners () { // eslint-disable-line no-unused-vars
+  var pushState = history.pushState
+  history.pushState = function (state, unknown, uri) {
+    if (typeof history.onpushstate === 'function') {
+      history.onpushstate({ state })
+    }
+    triggerEvent(window, 'pushstate', { uri })
+    return pushState.apply(history, arguments)
+  }
+  var replaceState = history.replaceState
+  history.replaceState = function (state) {
+    if (typeof history.onreplacestate === 'function') {
+      history.onreplacestate({ state })
+    }
+    // triggerEvent(window, 'replacestate', state)
+    return replaceState.apply(history, arguments)
+  }
+}
+  attachHistoryListeners()
+;
+  })();</script><script type="text/javascript" id="__tmpScript-444185166" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isOnTwoSevenTab = async () => {
+    const result = await postTo(window, { action: 'is-on-twoseven-tab' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-750492076" data-added-by-two-seven="1">(function() {
+    
+      const modal = document.querySelector('.twoseven-ext-tab-media-modal')
+      const modalCloseBtn = modal.querySelector('.close')
+      function closeModal () {
+        modal.style.display = 'none'
+        const frame = document.querySelector('#twoseven-ext-tab-media-iframe').contentWindow
+        frame.postMessage({
+          __evt_name: 'modal-hide'
+        }, '*')
+      }
+      modalCloseBtn.onclick = closeModal
+
+      window.onmessage = function (e) {
+        if (e.data.__evt_name === 'modal-hide') {
+          closeModal()
+        }
+      }
+
+      window.twoseven.closeTabMediaModal = closeModal
+
+      window.onclick = function (e) {
+        if (e.target.id === 'twoseven-ext-tab-media-modal' && modal.style.display === 'block') {
+            closeModal()
+        }
+      }
+    ;
+  })();</script></div><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--<base href="_w_c75d43ee/">--><base href=".">
+    <script type="text/javascript">
+(function() {
+  var workerId = '_w_c75d43ee';
+  // remove base href if worker ID is in url
+  if (window.location.href.indexOf(workerId) > 0) {
+    document.querySelector('base').removeAttribute('href');
+  }
+})();
+</script>
+
+      <script type="text/javascript">
+      var __connect = {
+        shinyPre101: false
+      }
+      </script>
+      
+
+  
+  <script type="application/shiny-singletons"></script>
+  <script type="application/html-dependencies">json2[2014.02.04];jquery[3.4.1];shiny[1.4.0.2];selectize[0.11.2];bootstrap-datepicker[1.6.4];bootstrap[3.4.1]</script>
+<script src="./Lab11Ex1_files/json2-min.js.download"></script>
+<script src="./Lab11Ex1_files/jquery.min.js.download"></script>
+<link href="./Lab11Ex1_files/shiny.css" rel="stylesheet">
+<script src="./Lab11Ex1_files/shiny.min.js.download"></script>
+<link href="./Lab11Ex1_files/selectize.bootstrap3.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="shared/selectize/js/es5-shim.min.js"></script>
+<![endif]-->
+<script src="./Lab11Ex1_files/selectize.min.js.download"></script>
+<link href="./Lab11Ex1_files/bootstrap-datepicker3.min.css" rel="stylesheet">
+<script src="./Lab11Ex1_files/bootstrap-datepicker.min.js.download"></script>
+<script>
+(function() {
+  var datepicker = $.fn.datepicker.noConflict();
+  $.fn.bsDatepicker = datepicker;
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="./Lab11Ex1_files/bootstrap.min.css" rel="stylesheet">
+<script src="./Lab11Ex1_files/bootstrap.min.js.download"></script>
+<script src="./Lab11Ex1_files/html5shiv.min.js.download"></script>
+<script src="./Lab11Ex1_files/respond.min.js.download"></script>  <title>COVID-19 Cases for each Country</title>
+
+<script src="./Lab11Ex1_files/sockjs-0.3.min.js.download"></script>
+<script src="./Lab11Ex1_files/shiny-server-client.min.js.download"></script>
+<script>preShinyInit({reconnect:true,reconnectTimeout:15000,disableProtocols:["xdr-streaming","xdr-polling","websocket"],transportDebugging:false,token:true,workerId:true,subappTag:true,extendSession:true,fixupInternalLinks:true});</script>
+<link rel="stylesheet" type="text/css" href="./Lab11Ex1_files/rstudio-connect.css">
+<link href="chrome-extension://cjdnfmjmdligcpfcekfmenlhiopehjkd/web_resources/modal/modal.css" rel="stylesheet" id="__tmpStyle"><link rel="stylesheet" type="text/css" href="./Lab11Ex1_files/shinyapps.css"></head>
+
+<body class="">
+<script type="text/javascript" src="./Lab11Ex1_files/iframeResizer.contentWindow.min.js.download"></script>
+<script type="text/javascript" src="./Lab11Ex1_files/shinyapps.frame.content.js.download"></script>
+<script type="text/javascript" src="./Lab11Ex1_files/shinyapps.js.download"></script>
+
+  <div class="container-fluid">
+    <h2>COVID-19 Cases for each Country</h2>
+    <p>
+      Data for this application are from the Johns Hopkins Center for Systems Science and Engineering.
+      <a href="https://github.com/CSSEGISandData">GitHub Repository</a>
+    </p>
+    <br>
+    <hr>
+    <div class="row">
+      <div class="col-sm-4">
+        <form class="well">
+          <div class="form-group shiny-input-container">
+            <label class="control-label" for="select_type-selectized">Report Type</label>
+            <div>
+              <select id="select_type" tabindex="-1" class="selectized shiny-bound-input" style="display: none;"><option value="Confirmed" selected="selected">Confirmed</option></select><div class="selectize-control single"><div class="selectize-input items full has-options has-items"><div class="item" data-value="Confirmed">Confirmed</div><input type="text" autocomplete="off" tabindex="" id="select_type-selectized" style="width: 4px;"></div><div class="selectize-dropdown single" style="display: none;"><div class="selectize-dropdown-content"></div></div></div>
+              <script type="application/json" data-for="select_type" data-nonempty="">{}</script>
+            </div>
+          </div>
+          <div class="form-group shiny-input-container">
+            <label class="control-label" for="select_country-selectized">Country</label>
+            <div>
+              <select id="select_country" tabindex="-1" class="selectized shiny-bound-input" style="display: none;"><option value="" selected="selected"></option></select><div class="selectize-control single"><div class="selectize-input items not-full has-options"><input type="text" autocomplete="off" tabindex="" id="select_country-selectized" style="width: 4px;"></div><div class="selectize-dropdown single" style="display: none;"><div class="selectize-dropdown-content"></div></div></div>
+              <script type="application/json" data-for="select_country" data-nonempty="">{}</script>
+            </div>
+          </div>
+          <div id="dates" class="shiny-date-range-input form-group shiny-input-container shiny-bound-input">
+            <label class="control-label" for="dates">Date range</label>
+            <div class="input-daterange input-group">
+              <input class="input-sm form-control" type="text" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-initial-date="2020-01-22" data-date-autoclose="true">
+              <span class="input-group-addon"> to </span>
+              <input class="input-sm form-control" type="text" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-date-autoclose="true">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-8">
+        <div id="Plot1" class="shiny-plot-output shiny-bound-output" style="width: 100% ; height: 400px"><img src="data:image/png;base64,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kxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN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JB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtNEtAkHzRJQZMsNElAk3zQJAVNstAkAU3yQZMUNMlCkwQ0yQdNUtAkC00S0CQfNElBkyw0SUCTfNAkBU2y0CQBTfJBkxQ0yUKTBDTJB01S0CQLTRLQJB80SUGTLDRJQJN80CQFTbLQJAFN8kGTFDTJQpMENMkHTVLQJAtN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" width="781" height="400"></div>
+      </div>
+    </div>
+  </div>
+
+
+
+<div>
+    <div id="twoseven-ext-tab-media-modal" class="twoseven-ext-tab-media-modal" style="display: none;">
+      <!-- Modal content -->
+      <div class="twoseven-ext-tab-media-modal-content">
+        <div class="iframe-container" style="height: 100%; width: 100%;">
+          <span class="close">×</span>
+        </div>
+      </div>
+    </div></div><div id="ss-connect-dialog" style="display: none;"><label>Attempting to reconnect...</label><label>&nbsp;</label></div><div id="ss-overlay" class="ss-gray-out" style="display: none;"></div></body></html>
