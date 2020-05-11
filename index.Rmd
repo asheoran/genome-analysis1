@@ -6,7 +6,7 @@ output: html_document
 bibliography: citations.bib
 ---
 
-Lab 2B: https://moodle.umass.edu/draftfile.php/1314808/user/draft/127854350/ASheoran-lab2B.html
+Lab 2B: https://moodle.umass.edu/draftfile.php/1314808/user/draft/709732467/ASheoran-lab2B.html?time=1589229925163
 
 Lab 3: file:///C:/Users/Atibha%20Sheoran/Documents/genome-analysis1/htmls/lab3_ASheoran.html
 

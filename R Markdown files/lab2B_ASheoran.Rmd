@@ -46,7 +46,7 @@ plot(treatment3,time)
 
 Exercise 5
 ```{r}
-SNP_table1 <- read.table("23andMe_complete.txt", header = TRUE, sep ="\t")
+SNP_table1 <- read.table("~/COLLEGE BABY!!!/Senior year/S2/Bio 497G/23andMe_complete.txt", header = TRUE, sep ="\t")
 SNP_table1
 str(SNP_table1)
 ```
@@ -54,11 +54,11 @@ This file is different than the truncated file because it reaches a max capacity
 
 Exercise 6
 ```{r}
-table(SNP_table1)
+table(SNP_table1$genotype)
 ```
 
 Exercise 7
 ```{r}
-SNP_table_A <- subset(SNP_table, genotype == 'A')
+SNP_table_A <- subset(SNP_table1, genotype == 'A')
 SNP_table_A
 ```
