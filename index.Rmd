@@ -6,13 +6,13 @@ output: html_document
 bibliography: citations.bib
 ---
 
-Lab 2B: https://moodle.umass.edu/draftfile.php/1314808/user/draft/709732467/ASheoran-lab2B.html?time=1589229925163
+[Lab 2B]: (htmls/lab2B_ASheoran.html)
 
-Lab 3: file:///C:/Users/Atibha%20Sheoran/Documents/genome-analysis1/htmls/lab3_ASheoran.html
+[Lab 3]: (htmls/lab3_ASheoran.html)
 
-Lab 4: file:///C:/Users/Atibha%20Sheoran/Documents/genome-analysis1/htmls/lab4_ASheoran.html
+[Lab 4]: (htmls/lab4_ASheoran.html)
 
-Lab 5: file:///C:/Users/Atibha%20Sheoran/Documents/genome-analysis1/htmls/Lab5_ASheoran.html
+[Lab 5]: (htmls/Lab5_ASheoran.html)
 
 Lab 9: https://moodle.umass.edu/pluginfile.php/3107910/assignsubmission_onlinetext/submissions_onlinetext/4404464/ASheoran-lab9.html?time=1589204519153
 
